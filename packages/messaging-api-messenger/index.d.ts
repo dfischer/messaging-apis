@@ -1,5 +1,5 @@
 declare module 'messaging-api-messenger' {
-  type SendMessageSucessResponse = {
+  export type SendMessageSucessResponse = {
     recipient_id: string;
     message_id: string;
   };
@@ -69,12 +69,13 @@ declare module 'messaging-api-messenger' {
     | 'FEATURE_FUNCTIONALITY_UPDATE'
     | 'TICKET_UPDATE';
 
-  type TemplateButton = {
-    type: string;
+  export type TemplateButton = {
+    type: 'web_url' | 'postback';
     title: string;
     url?: string;
     payload?: string;
     webview_height_ratio?: 'compact' | 'tall' | 'full';
+    messenger_extensions?: 'true' | 'false';
   };
 
   export class MessengerClient {
@@ -87,6 +88,13 @@ declare module 'messaging-api-messenger' {
     sendTemplate(
       recipient: UserID | Recipient,
       payload: AttachmentPayload,
+      options?: SendOption,
+    ): Promise<SendMessageSucessResponse>;
+
+    sendButtonTemplate(
+      recipient: UserID | Recipient,
+      text: string,
+      buttons: Array<TemplateButton>,
       options?: SendOption,
     ): Promise<SendMessageSucessResponse>;
 
