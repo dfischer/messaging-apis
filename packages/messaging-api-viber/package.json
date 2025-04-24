@@ -18,7 +18,7 @@
     "viber"
   ],
   "dependencies": {
-    "axios": "^0.17.0",
+    "axios": "^1.8.3",
     "axios-error": "^0.7.0-rc.3"
   },
   "devDependencies": {
